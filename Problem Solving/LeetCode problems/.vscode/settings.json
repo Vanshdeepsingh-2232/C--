@@ -1,0 +1,16 @@
+{
+    "cmake.configureOnOpen": false,
+    "files.associations": {
+        "algorithm": "cpp",
+        "xutility": "cpp",
+        "xstring": "cpp",
+        "stack": "cpp",
+        "vector": "cpp",
+        "string": "cpp",
+        "set": "cpp",
+        "iostream": "cpp",
+        "deque": "cpp",
+        "format": "cpp",
+        "list": "cpp"
+    }
+}

@@ -1,0 +1,13 @@
+{
+    "files.associations": {
+        "iostream": "cpp",
+        "vector": "cpp",
+        "chrono": "cpp",
+        "cmath": "cpp",
+        "xhash": "cpp",
+        "set": "cpp",
+        "xstring": "cpp",
+        "utility": "cpp",
+        "unordered_map": "cpp"
+    }
+}
