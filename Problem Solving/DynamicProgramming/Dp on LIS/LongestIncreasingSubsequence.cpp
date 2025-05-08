@@ -39,30 +39,53 @@ using namespace std;
 //     }
 // };
 
+// class Solution
+// {
+// public:
+//     int lengthOfLIS(vector<int> &nums)
+//     {
+//         int n = nums.size();
+//         vector<int> pre(n + 1, 0);
+//         vector<int> curr(n + 1, 0);
+
+//         for (int i = n - 1; i >= 0; i--)
+//         {
+//             for (int prev = i - 1; prev >= -1; prev--)
+//             {
+//                 int len = 0;
+//                 if (prev == -1 || nums[i] > nums[prev])
+//                     len = 1 + pre[i + 1];
+//                 len = max(len, 0 + pre[prev + 1]);
+//                 curr[prev + 1] = len;
+//             }
+
+//             pre = curr;
+//         }
+
+//         return pre[-1 + 1];
+//     }
+// };
+
 class Solution
 {
 public:
     int lengthOfLIS(vector<int> &nums)
     {
-        int n = nums.size();
-        vector<int> pre(n + 1, 0);
-        vector<int> curr(n + 1, 0);
+        vector<int> temp;
+        temp.push_back(nums[0]);
 
-        for (int i = n - 1; i >= 0; i--)
+        for (int i = 1; i < nums.size(); i++)
         {
-            for (int prev = i - 1; prev >= -1; prev--)
+            if (nums[i] > temp.back())
+                temp.push_back(nums[i]);
+            else
             {
-                int len = 0;
-                if (prev == -1 || nums[i] > nums[prev])
-                    len = 1 + pre[i + 1];
-                len = max(len, 0 + pre[prev + 1]);
-                curr[prev + 1] = len;
+                auto lb = lower_bound(temp.begin(), temp.end(), nums[i]);
+                *lb = nums[i];
             }
-
-            pre = curr;
         }
 
-        return pre[-1 + 1];
+        return temp.size();
     }
 };
 
