@@ -66,26 +66,70 @@ using namespace std;
 //     }
 // };
 
+// class Solution
+// {
+// public:
+//     int lengthOfLIS(vector<int> &nums)
+//     {
+//         vector<int> temp;
+//         temp.push_back(nums[0]);
+
+//         for (int i = 1; i < nums.size(); i++)
+//         {
+//             if (nums[i] > temp.back())
+//                 temp.push_back(nums[i]);
+//             else
+//             {
+//                 auto lb = lower_bound(temp.begin(), temp.end(), nums[i]);
+//                 *lb = nums[i];
+//             }
+//         }
+
+//         return temp.size();
+//     }
+// };
+
 class Solution
 {
 public:
     int lengthOfLIS(vector<int> &nums)
     {
-        vector<int> temp;
-        temp.push_back(nums[0]);
+        int n = nums.size();
+        vector<int> dp(n, 1);
+        vector<int> hash(n, 0);
+        int maxi = 1;
+        int last_i = 0;
 
-        for (int i = 1; i < nums.size(); i++)
+        for (int i = 0; i < n; i++)
         {
-            if (nums[i] > temp.back())
-                temp.push_back(nums[i]);
-            else
+            hash[i] = i;
+            for (int j = 0; j < i; j++)
             {
-                auto lb = lower_bound(temp.begin(), temp.end(), nums[i]);
-                *lb = nums[i];
+                if (nums[j] < nums[i] && 1 + dp[j] > dp[i])
+                {
+                    dp[i] = 1 + dp[j];
+                    hash[i] = j;
+                }
+            }
+
+            if (dp[i] > maxi)
+            {
+                maxi = dp[i];
+                last_i = i;
             }
         }
 
-        return temp.size();
+        vector<int> t;
+        t.push_back(nums[last_i]);
+        while (hash[last_i] != last_i)
+        {
+            last_i = hash[last_i];
+            t.push_back(nums[last_i]);
+        }
+
+        reverse(t.begin(), t.end());
+        for (int i : t)
+            cout << i << " ";
     }
 };
 
@@ -93,6 +137,6 @@ int main()
 {
     vector<int> v = {10, 9, 2, 5, 3, 7, 101, 18};
     Solution s1;
-    cout << s1.lengthOfLIS(v);
+    s1.lengthOfLIS(v);
     return 0;
 }
