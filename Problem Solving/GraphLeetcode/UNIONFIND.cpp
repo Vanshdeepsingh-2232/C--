@@ -70,7 +70,7 @@ public:
 
         if (rank[parent_u] == rank[parent_v])
         {
-            parent[parent_v] = u;
+            parent[parent_v] = parent_u;
             rank[parent_u]++;
         }
         else if (rank[parent_u] < rank[parent_v])
